@@ -162,44 +162,46 @@ const CsvUploader = () => {
   return (
     <div className="p-6 bg-gray-50 rounded-lg shadow-md">
       <h2 className="text-xl text-center font-semibold mb-4">File Extractor</h2>
-
-      <div className="flex justify-between mb-4">
-        <div>
+  
+      <div className="flex flex-col sm:flex-row sm:justify-between mb-4 space-y-4 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-5">
           <input
             type="file"
             accept=".csv"
             onChange={handleFileChange}
-            className="border border-gray-300 rounded-md py-2 px-4 mr-5"
+            className="border border-gray-300 rounded-md py-2 px-4 w-full sm:w-auto"
           />
           <button
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300"
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300 w-full sm:w-auto"
             onClick={handleFileUpload}
           >
             {isUploading ? "Uploading..." : "Upload"}
           </button>
         </div>
+  
         <button
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300 w-full sm:w-auto"
           onClick={handleTriggerPipeline}
-        > {isTriggerPipeline ? "Triggering Pipeline..." : "Trigger Pipeline"}
+        >
+          {isTriggerPipeline ? "Triggering Pipeline..." : "Trigger Pipeline"}
         </button>
       </div>
-
+  
       <DataTable
         isLoading={isLoading}
         tableData={tableData}
         handleDataChange={handleDataChange}
       />
-
-      <div className="flex justify-between mt-4">
+  
+      <div className="flex flex-col sm:flex-row sm:justify-between mt-4 space-y-4 sm:space-y-0">
         <button
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300 w-full sm:w-auto"
           onClick={handleReset}
         >
           Reset
         </button>
         <button
-          className={`bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 ${
+          className={`bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 w-full sm:w-auto ${
             !isDataChanged ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSave}
@@ -208,7 +210,7 @@ const CsvUploader = () => {
           Save
         </button>
       </div>
-
+  
       {notification.message && (
         <Notification
           message={notification.message}
@@ -218,6 +220,7 @@ const CsvUploader = () => {
       )}
     </div>
   );
+  
 };
 
 export default CsvUploader;

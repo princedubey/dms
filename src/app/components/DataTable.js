@@ -48,55 +48,59 @@ const DataTable = ({ isLoading, tableData, handleDataChange }) => {
   };
 
   return (
-    <>
-      <table className="min-w-full table-auto border-collapse border border-gray-300">
-        <tbody>
-          {isLoading ? (
-            <>
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </>
-          ) : (
-            Object.keys(tableData).map(
-              (key) =>
-                !["_id", "createdAt", "updatedAt"].includes(key) && (
-                  <tr
-                    key={key}
-                    className="hover:bg-gray-100 transition duration-200"
-                  >
-                    <td className="border border-gray-300 px-1 text-center whitespace-nowrap">
-                      {keyMapping[key]}
-                    </td>
-                    <td className="border border-gray-300 px-2 w-5/6">
-                      <input
-                        className="border p-1 w-full rounded-md focus:ring-2 focus:ring-blue-500"
-                        value={
-                          Array.isArray(tableData[key])
-                            ? tableData[key].join(" | ")
-                            : tableData[key]
-                        }
-                        onChange={(e) => handleDataChange(e, key)}
-                      />
-                    </td>
-                  </tr>
-                )
-            )
-          )}
-        </tbody>
-      </table>
-      <div className="flex">
-        <button
-          onClick={downloadCSV}
-          className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200"
-        >
-          Download CSV
-        </button>
-      </div>
-    </>
+<>
+  <div className="overflow-x-auto">
+    <table className="min-w-full table-auto border-collapse border border-gray-300">
+      <tbody>
+        {isLoading ? (
+          <>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </>
+        ) : (
+          Object.keys(tableData).map(
+            (key) =>
+              !["_id", "createdAt", "updatedAt"].includes(key) && (
+                <tr
+                  key={key}
+                  className="hover:bg-gray-100 transition duration-200"
+                >
+                  <td className="border border-gray-300 px-1 text-center whitespace-nowrap">
+                    {keyMapping[key]}
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:w-5/6">
+                    <input
+                      className="border p-1 w-full rounded-md focus:ring-2 focus:ring-blue-500"
+                      value={
+                        Array.isArray(tableData[key])
+                          ? tableData[key].join(" | ")
+                          : tableData[key]
+                      }
+                      onChange={(e) => handleDataChange(e, key)}
+                    />
+                  </td>
+                </tr>
+              )
+          )
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <div className="flex justify-center sm:justify-start mt-4">
+    <button
+      onClick={downloadCSV}
+      className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200 w-full sm:w-auto"
+    >
+      Download CSV
+    </button>
+  </div>
+</>
+
   );
 };
 
