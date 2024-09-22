@@ -160,11 +160,11 @@ const CsvUploader = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+    <div className="p-2 bg-gray-50 rounded-lg shadow-md lg:p-8">
       <h2 className="text-xl text-center font-semibold mb-4">File Extractor</h2>
   
       <div className="flex flex-col sm:flex-row sm:justify-between mb-4 space-y-4 sm:space-y-0">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-2">
           <input
             type="file"
             accept=".csv"
