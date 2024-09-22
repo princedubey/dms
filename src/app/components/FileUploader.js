@@ -111,7 +111,7 @@ const CsvUploader = () => {
 
   const handleSave = async () => {
     const id = tableData._id;
-    const updateData = { ...tableData };
+    let updateData = { ...tableData };
 
     // Iterate over the keys in updateData and ensure array values are processed correctly
     Object.keys(updateData).forEach((key) => {
@@ -125,6 +125,12 @@ const CsvUploader = () => {
     });
 
     setIsLoading(true);
+
+    //joi validation not allowed
+    delete updateData._id
+    delete updateData.createdAt
+    delete updateData.updatedAt
+
     try {
       const response = await fetch(`/dowjones/api/extraction?id=${id}`, {
         method: "PUT",
@@ -195,13 +201,13 @@ const CsvUploader = () => {
   
       <div className="flex flex-col sm:flex-row sm:justify-between mt-4 space-y-4 sm:space-y-0">
         <button
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300 w-full sm:w-auto"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-300 w-full sm:w-auto"
           onClick={handleReset}
         >
           Reset
         </button>
         <button
-          className={`bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 w-full sm:w-auto ${
+          className={`bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-300 w-full sm:w-auto ${
             !isDataChanged ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSave}
