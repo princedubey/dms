@@ -15,7 +15,7 @@ const CsvUploader = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/dowjones/api/extraction");
+      const response = await fetch("/api/extraction");
       if (!response.ok) throw new Error("Failed to fetch data");
       const { data } = await response.json();
 
@@ -67,7 +67,7 @@ const CsvUploader = () => {
       formData.append("file", selectedFile);
   
       // Send the file directly to the upload API
-      const response = await fetch("/dowjones/api/send-to-s3", {
+      const response = await fetch("/api/send-to-s3", {
         method: "POST",
         body: formData,
       });
@@ -94,7 +94,7 @@ const CsvUploader = () => {
   
     try {
 
-      const response = await fetch("/dowjones/api/mutation", {
+      const response = await fetch("/api/mutation", {
         method: "POST",
       });
   
@@ -132,7 +132,7 @@ const CsvUploader = () => {
     delete updateData.updatedAt
 
     try {
-      const response = await fetch(`/dowjones/api/extraction?id=${id}`, {
+      const response = await fetch(`/api/extraction?id=${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData),
